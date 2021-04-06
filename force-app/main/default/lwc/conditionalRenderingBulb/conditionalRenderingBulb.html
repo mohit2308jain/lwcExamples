@@ -1,0 +1,21 @@
+<template>
+    <lightning-card title="Conditional Rendering Example" icon-name="custom:custom19">
+        <div class="slds-grid">
+            <div class="slds-col">
+                <div class="slds-m-around_medium">
+                    <template if:false={switchOn}>
+                        <img src={bulbOff}>
+                    </template>
+                    <template if:true={switchOn}>
+                        <img src={bulbOn}>
+                    </template>
+                </div>
+            </div>
+            <div class="slds-col">
+                <div class="slds-m-around_medium">
+                    <lightning-button label={switchLabel} onclick={handleSwitch}></lightning-button>
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+</template>

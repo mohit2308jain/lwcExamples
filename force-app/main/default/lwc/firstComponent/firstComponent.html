@@ -1,0 +1,14 @@
+<template>
+    <div class="slds-card">
+        <div class="slds-p-around_medium">
+            <lightning-input type="text" label="Enter some text" value={userInput} 
+                placeholder="Write Something Here..." onchange={handleInputChange}>
+            </lightning-input>
+    
+            <div class="lgc-bg slds-m-around_medium">
+                {userInput}
+            </div>
+            
+        </div>
+    </div>
+</template>
