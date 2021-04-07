@@ -1,18 +1,18 @@
 <template>
     <lightning-card title="Conditional Rendering Example" icon-name="custom:custom19">
-        <div class="slds-grid">
+        <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-center">
             <div class="slds-col">
                 <div class="slds-m-around_medium">
                     <template if:false={switchOn}>
-                        <img src={bulbOff}>
+                        <img src={bulbOff} class="imgSize">
                     </template>
                     <template if:true={switchOn}>
-                        <img src={bulbOn}>
+                        <img src={bulbOn} class="imgSize">
                     </template>
                 </div>
             </div>
             <div class="slds-col">
-                <div class="slds-m-around_medium">
+                <div class="slds-m-around_large">
                     <lightning-button label={switchLabel} onclick={handleSwitch}></lightning-button>
                 </div>
             </div>
