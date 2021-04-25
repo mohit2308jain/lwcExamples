@@ -3,12 +3,21 @@
         <div class="slds-m-around_medium">
 
             <lightning-input type="search" onchange={handleKeyChange} class="slds-m-bottom_small" label="Search"
-                value={searchKey}></lightning-input>
+                value={searchKey}>
+            </lightning-input>
             <template if:true={len}>
                 Not Found!
             </template>
 
             <template if:false={len}>
+                <lightning-combobox
+                    name="Records Per Page:"
+                    label="Records Per Page:"
+                    value={pageSize}
+                    options={recordOptions}
+                    onchange={handleRecordPerPageDropdown}>
+                </lightning-combobox>
+
                 <lightning-datatable key-field="Id" data={data} columns={columns} sorted-by={sortedBy}
                     sorted-direction={sortedDirection} onsort={sortColumns}>
                 </lightning-datatable>

@@ -20,6 +20,12 @@ const COLUMNS = [{
 }
 ];
 
+const RECORDPERPAGELABELS = [
+    { label: '5', value: '5' },
+    { label: '8', value: '8' },
+    { label: '10', value: '10' }
+];
+
 export default class PaginationExample2 extends LightningElement {
     error;
     sortedDirection = 'asc';
@@ -34,11 +40,20 @@ export default class PaginationExample2 extends LightningElement {
     columns; 
     startingRecord = 1;
     endingRecord = 0; 
-    pageSize = 10; 
+    pageSize = '10'; 
     totalRecountCount = 0;
     totalPage = 0;
     searchTimeoutVar = null;
     len = false;
+
+    get recordOptions() {
+        return RECORDPERPAGELABELS;
+    }
+
+    handleRecordPerPageDropdown = (event) => {
+        this.pageSize = event.detail.value;
+        this.setPages();
+    }
   
     @wire(getAllOpps)
     wiredAccounts({ error, data }) {
@@ -57,11 +72,11 @@ export default class PaginationExample2 extends LightningElement {
         if(this.items.length>0){
             this.len = false;
             this.totalRecountCount = this.items.length; 
-            this.totalPage = Math.ceil(this.totalRecountCount / this.pageSize);
+            this.totalPage = Math.ceil(this.totalRecountCount / parseInt(this.pageSize));
             this.page = 1;
             
-            this.data = this.items.slice(0,this.pageSize); 
-            this.endingRecord = this.pageSize;
+            this.data = this.items.slice(0,parseInt(this.pageSize)); 
+            this.endingRecord = parseInt(this.pageSize);
             this.columns = COLUMNS;
         }
         else{
@@ -122,8 +137,8 @@ export default class PaginationExample2 extends LightningElement {
     //this method displays records page by page
     displayRecordPerPage(page){
 
-        this.startingRecord = ((page - 1) * this.pageSize) ;
-        this.endingRecord = (this.pageSize * page);
+        this.startingRecord = ((page - 1) * parseInt(this.pageSize)) ;
+        this.endingRecord = (parseInt(this.pageSize) * page);
 
         this.endingRecord = (this.endingRecord > this.totalRecountCount) ? this.totalRecountCount : this.endingRecord; 
 
